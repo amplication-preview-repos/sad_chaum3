@@ -1,3 +1,4 @@
+import { RabbitMQModule } from "./rabbitmq/rabbitmq.module";
 import { Module } from "@nestjs/common";
 import { CompanyModule } from "./company/company.module";
 import { JobModule } from "./job/job.module";
@@ -17,6 +18,7 @@ import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 @Module({
   controllers: [],
   imports: [
+    RabbitMQModule,
     CompanyModule,
     JobModule,
     NotificationModule,
