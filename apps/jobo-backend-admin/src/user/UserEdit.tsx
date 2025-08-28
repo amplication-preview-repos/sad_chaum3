@@ -1,0 +1,57 @@
+import * as React from "react";
+
+import {
+  Edit,
+  SimpleForm,
+  EditProps,
+  NumberInput,
+  ReferenceArrayInput,
+  SelectArrayInput,
+  TextInput,
+  PasswordInput,
+} from "react-admin";
+
+import { ChatTitle } from "../chat/ChatTitle";
+import { NotificationTitle } from "../notification/NotificationTitle";
+import { ROLES_OPTIONS } from "../user/RolesOptions";
+
+export const UserEdit = (props: EditProps): React.ReactElement => {
+  return (
+    <Edit {...props}>
+      <SimpleForm>
+        <NumberInput step={1} label="age" source="age" />
+        <ReferenceArrayInput source="chats" reference="Chat">
+          <SelectArrayInput
+            optionText={ChatTitle}
+            parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+            format={(value: any) => value && value.map((v: any) => v.id)}
+          />
+        </ReferenceArrayInput>
+        <div />
+        <div />
+        <TextInput label="Email" source="email" type="email" />
+        <TextInput label="First Name" source="firstName" />
+        <TextInput label="Last Name" source="lastName" />
+        <ReferenceArrayInput source="notifications" reference="Notification">
+          <SelectArrayInput
+            optionText={NotificationTitle}
+            parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+            format={(value: any) => value && value.map((v: any) => v.id)}
+          />
+        </ReferenceArrayInput>
+        <PasswordInput label="Password" source="password" />
+        <TextInput label="phone" source="phone" />
+        <SelectArrayInput
+          source="roles"
+          choices={ROLES_OPTIONS}
+          optionText="label"
+          optionValue="value"
+        />
+        <TextInput label="skills" multiline source="skills" />
+        <TextInput label="Username" source="username" />
+        <div />
+        <div />
+      </SimpleForm>
+    </Edit>
+  );
+};
